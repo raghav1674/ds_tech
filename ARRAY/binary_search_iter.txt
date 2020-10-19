@@ -1,0 +1,19 @@
+#include<iostream>
+
+int binary_search(int* arr,int value,int size){
+    int low = 0;
+    int high = size-1;
+    int mid;
+    
+    while(low<=high){
+        
+    mid = (low + high)/2;
+
+    if(arr[mid]==value)
+        return mid;
+    else 
+        if(arr[mid]>value)high=mid-1;
+    else 
+        low=mid+1;
+    }
+}

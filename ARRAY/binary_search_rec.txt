@@ -1,0 +1,18 @@
+#include <iostream>
+
+int binary_search_rec(int *arr, int value, int low, int high)
+{
+    int mid;
+    if (low > high)
+        return -1;
+    mid = low + ((high - low) / 2); // suppose low = 5 and high=10 now mid should be 7 , but when we calculate (10-5)/2 == 2  and we need to add the low value to it.  ie 2+5=7
+
+    if (arr[mid] == value)
+        return mid;
+
+    else if (arr[mid] < value)
+        return binary_search_rec(arr, value, low, mid - 1);
+
+    else
+        return binary_search_rec(arr, value, mid + 1, high);
+}

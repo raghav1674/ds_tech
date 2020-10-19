@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+// we need to find how many elements are rotated.
+
+int finder(vector<int> &b, int low, int high)
+{
+    int mid;
+    if (low > high)
+        return -1;
+
+    // it means we don't find any value and there is no item remaining to be searched.
+    // check if the mid value is less than the previous value.
+
+    mid = (low + high) / 2;
+    if (low < mid && b[mid] < b[mid - 1]) // we are checking towards the left
+        return mid;
+    if (high > mid && b[mid + 1] < b[mid]) // we are checking toward the right.
+        return mid + 1;
+
+    // now search for th problematic position.
+
+    // if the mid is greater than the high, it means there is something worng on the right side,
+    if (b[mid] > b[high])
+        return finder(b, mid + 1, high);
+    return finder(b, low, mid - 1); //else wrong on the left side.
+}
+
