@@ -1,0 +1,49 @@
+#include <iostream>
+
+int find_in_rotated_array(int *arr, int value, int low, int high)
+{
+
+    int mid;
+    if (low > high)
+        return -1;
+
+    mid = low + ((high - low) / 2);
+    // // now to need to search for that element either in the normal array part or the rotated array part for that
+    // need to check if that element is greater than the mid that means it towards the right side and to check if its in normal portion of the array we can check if the low is less than the mid and high is larger than the mid. and if its not the case then it is not in normal array.
+
+    if (arr[mid] == value)
+        return mid;
+
+    //  go to left.
+    if (arr[mid] >= value && arr[low] <= value && arr[low] <= arr[mid])
+                return find_in_rotated_array(arr,value,low,mid-1);
+
+
+    // value greater than the mid we need to move to the right.
+    else if (arr[mid] <= value && arr[high] >= value && arr[high] >= arr[mid])
+        return find_in_rotated_array(arr, value, mid + 1, high);
+
+
+ 
+    // now the turn of the rotated array.
+
+    else if (arr[mid] >= arr[high])
+        return find_in_rotated_array(arr, value, mid + 1, high);
+    else if(arr[mid]<=arr[low])
+        return find_in_rotated_array(arr, value, low, mid - 1);
+
+    return -1;
+
+}
+
+
+int main(){
+
+
+    int arr[6]={2,3,4,5,6,1};
+    int size=sizeof(arr)/sizeof(int);
+   
+    printf("%d",find_in_rotated_array(arr,1,0,size));
+
+
+}
