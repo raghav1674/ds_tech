@@ -1,0 +1,77 @@
+#include <iostream>
+
+int smallest_of_arrays(int *arr, int *brr, int *crr, int a, int b, int c) // start from begining
+{
+
+    int a_smallest = *arr;
+    int b_smallest = *brr;
+    int c_smallest = *crr;
+
+    int a_i = 0, b_i = 0, c_i = 0;
+    while (a_i < a && b_i < b && c_i < c)
+    {
+
+        if (a_smallest == b_smallest && b_smallest == c_smallest)
+            return a_smallest;
+
+        if (a_smallest <= b_smallest && a_smallest <= c_smallest && a_i < a)
+        {
+
+            a_i++;
+            a_smallest = *(arr + a_i);
+        }
+        else if (b_smallest <= a_smallest && b_smallest <= c_smallest && b_i < b)
+        {
+            b_i++;
+            b_smallest = *(brr + b_i);
+        }
+        else
+        {
+
+            c_i++;
+            c_smallest = *(crr + c_i);
+        }
+    }
+    return -1;
+}
+
+int largest_of_arrays(int *arr, int *brr, int *crr, int a, int b, int c) // ascending order
+{
+
+    int a_i = a - 1, b_i = b - 1, c_i = c - 1; // start from the end as we know it is in ascending order.
+
+    while (a_i >= 0 && b_i >= 0 && c_i >= 0)
+    {
+
+        if (arr[a_i] == brr[b_i] && brr[b_i] == crr[c_i])
+            return arr[a_i];
+
+        else if (arr[a_i] >= brr[b_i] && arr[a_i] >= crr[c_i]) // which element is bigger or equal then decrement that
+        {
+            a_i--; // it may be possible two elements are equal but one is not then we need to decrement also.
+        }
+        else if (brr[b_i] >= arr[a_i] && brr[b_i] >= crr[c_i])
+        {
+            b_i--;
+        }
+
+        else
+        {
+            c_i--;
+        }
+    }
+
+    return -1;
+}
+
+int main()
+{
+
+    int arr[6] = {1, 2, 3, 4, 9, 13};
+
+    int brr[8] = {1, 7, 8, 8, 10, 11, 13, 13};
+
+    int crr[5] = {1, 6, 9, 13, 25};
+
+    std::cout << "ans:" << largest_of_arrays(arr, brr, crr, 6, 8, 5) << "\n";
+}
