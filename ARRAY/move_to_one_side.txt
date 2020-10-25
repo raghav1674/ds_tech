@@ -1,0 +1,36 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+void move_all_to_right(vector<int> &arr, int value)
+{
+    int read = 0;
+    int write = 0;
+
+    while (read != arr.size())
+    {
+        if ((arr[read] != value)) // if value at read != value then replace the write value with the read value 
+        {
+
+            arr[write] = arr[read]; 
+
+            write++; // and also increment the  write value.
+        }
+        read++;
+    }
+
+    
+    for (int i = write; i <= read; i++) // then after that we have the count of values occurred in the given array and now we need to fill the right range with that value.
+        arr[i] = value; 
+}
+
+
+int main(){
+
+
+    vector<int>arr={2,1,2,3,3,4};
+
+    move_all_to_right(arr,2);
+    
+    for(int i:arr)
+        cout<<i<<" ";
+}
