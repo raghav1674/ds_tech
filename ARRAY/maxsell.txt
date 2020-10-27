@@ -1,0 +1,39 @@
+int findMaxProfit(vector<int> arr) {
+    int min_value=arr[0];
+    int profit = INT_MIN;
+    for(int i=0;i<arr.size();i++){
+       
+        if(min_value>arr[i])
+                min_value=arr[i];
+            
+        if(profit<(arr[i]-min_value))
+                profit=(arr[i]-min_value);   
+    }
+    
+   
+    return profit;
+}
+//second 
+
+int findMaxProfit(int numOfPredictedTimes, vector<int> predictedSharePrices) {
+    
+    int profit=0;
+    int cur_profit;
+    for(int i=0;i<numOfPredictedTimes-1;i++){
+            cur_profit=predictedSharePrices[i+1]-predictedSharePrices[i];
+            if(cur_profit>0){
+            
+            profit+=cur_profit;
+            }
+            }
+    return profit;
+}
+
+
+// example
+
+0 -4  5  -2  -1   4   1    -5  2     3   -4   3   0   5
+5  1  6   3   2   5   6    1   3     6    2   5   5  10
+
+0    -90  2   -7  1   8   -9  1
+100 10   12   5   6   14  5   6s
